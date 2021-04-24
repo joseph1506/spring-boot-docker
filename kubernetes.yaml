@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
       - name: spring-boot-docker
-        image: joseph1506/spring-boot-docker:latest
+        image: joeaksregistry.azurecr.io/spring-boot-docker:latest
         ports:
         - containerPort: 8081
       imagePullSecrets:
-      - name: guidesecret
+      - name: acrsecret
 ---
 apiVersion: v1
 kind: Service
