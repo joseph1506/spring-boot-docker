@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-docker
+  labels:
+    app: spring-boot-docker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-docker
+  template:
+    metadata:
+      labels:
+        app: spring-boot-docker
+    spec:
+      containers:
+      - name: spring-boot-docker
+        image: joseph1506/spring-boot-docker:latest
+        ports:
+        - containerPort: 8081
+      imagePullSecrets:
+      - name: guidesecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-docker-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: spring-boot-docker
+  ports:
+  - protocol: TCP
+    port: 9081
+    targetPort: 8081
+    nodePort: 30001
